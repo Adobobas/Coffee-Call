@@ -1,235 +1,382 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coffee Call - Order Your Coffee</title>
+    <title>Coffee Call</title>
+    <meta name="description" content="Coffee Call - Your daily dose of coffee happiness. Explore our menu, reviews, and more!">
+
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #D2B48C; /* Coffee-inspired background color */
-            color: #3E2723; /* Coffee-colored text for better contrast */
+            background-color: #ece0d1;
+            color: #333;
         }
-        .navbar {
-            background-color: #d6bc88; /* Dark background color for the navbar */
-            color: rgb(20, 20, 20); /* White text for visibility */
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 42px 50px rgba(0, 0, 0, 0.3); /* Adds a shadow effect */
-            position: relative; /* Maintains proper positioning */
-        }
-        .logo-image {
-            width: 50px;
-            vertical-align: middle;
-        }
-        .order-container {
-            padding: 20px;
-            text-align: center;
-        }
-        .step {
-            display: none;
-        }
-        .active-step {
-            display: block;
-        }
-        .step-buttons {
-            margin-top: 20px;
-        }
-        .step-buttons button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #6D4C41; /* Coffee brown for buttons */
+        
+        header {
+            background-color: #38220f;
             color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        header .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+        
+        header nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 1em;
+            transition: color 0.3s ease;
+        }
+        
+        header nav a:hover {
+            color: #967259;
+        }
+        
+        .hero {
+            background: url('coffeecall.jpg') no-repeat center center/cover;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #38220f;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        
+        .hero h1 {
+            font-size: 3.5em;
+            margin: 0;
+        }
+        
+        .hero p {
+            font-size: 1.5em;
+            margin-top: 10px;
+        }
+        
+        .hero button {
+            margin-top: 20px;
+            background-color: #dbc1ac;
+            color: #38220f;
             border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .hero button:hover {
+            background-color: #967259;
+        }
+        
+        section {
+            padding: 40px;
+            margin: 20px auto;
+            max-width: 85%;
+        }
+        
+        #about .about-wrapper {
+            background-color: #634832;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(238, 234, 234, 0.952);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            color: #ece0d1;
+        }
+        
+        #menu {
+            text-align: center;
+            background-color: #f9f5f0;
+            padding: 40px 20px;
+        }
+        
+        .menu-item {
+            background-color: #fff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .menu-item img {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+        
+        .menu-item h3 {
+            margin: 0;
+            font-size: 1.8em;
+            color: #38220f;
+        }
+        
+        .menu-item p {
+            font-size: 1.2em;
+            color: #634832;
+        }
+        
+        #reviews {
+            text-align: center;
+            background-color: #fff8e6;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .review {
+            margin: 20px auto;
+            max-width: 600px;
+            font-style: italic;
+        }
+        
+        #reviews button {
+            background-color: #dbc1ac;
+            color: #38220f;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        #reviews button:hover {
+            background-color: #967259;
+        }
+        
+        #contact {
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #f9f5f0;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
             border-radius: 5px;
         }
-        .step-buttons button:hover {
-            background-color: #5D4037; /* Darker coffee brown for hover effect */
+        
+        .contact-form button {
+            background-color: #38220f;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-        .about-us {
-            background-color: #f4f4f4;
+        
+        .contact-form button:hover {
+            background-color: #56392d;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
             padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 500px;
             text-align: center;
         }
-        .social-icons {
-            text-align: center;
+        
+        .modal-content h2 {
+            margin-top: 0;
+        }
+        
+        .close-button {
+            background-color: #38220f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
             margin-top: 20px;
         }
-        .social-icons a {
-            margin: 0 10px;
-            text-decoration: none;
-        }
-        .social-icons img {
-            width: 30px;
-            height: 30px;
+        
+        .close-button:hover {
+            background-color: #56392d;
         }
     </style>
 </head>
+
 <body>
-    <!-- Navigation Bar -->
-    <div class="navbar">
-        <h2>
-            <img src="COFFEE.png" alt="Coffee Call Logo" class="logo-image">
-            Coffee Call
-        </h2>
+    <header>
+        <div class="logo">Coffee Call</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#menu">Menu</a>
+            <a href="#about">About Us</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <h2>Order Your Coffee</h2>
+            <ol>
+                <li>Select your coffee size: Short, Tall, Grande, or Venti.</li>
+                <li>Choose your coffee flavor: Espresso, Latte, Cappuccino, etc.</li>
+                <li>Pick your toppings: Whipped Cream, Caramel Drizzle, etc.</li>
+                <li>Add a pastry if desired.</li>
+                <li>Review your order and confirm.</li>
+            </ol>
+            <button class="close-button">Close</button>
+        </div>
+    </div>
+    <div class="hero" id="home">
+        <div>
+            <h1>Welcome to Coffee Call</h1>
+            <p>Your daily dose of coffee happiness!</p>
+            <button id="orderButton">Order Now</button>
+        </div>
     </div>
 
-    <div class="order-container">
-        <h1>Order Your Coffee</h1>
 
-        <div class="coffee-cup"></div>
-
-        <!-- Step 1: Customer Name and Cup Size -->
-        <div class="step active-step" id="step1">
-            <label for="customerName">Enter Your Name:</label>
-            <input type="text" id="customerName" placeholder="Your Name" required><br><br>
-
-            <label for="cupSize">Choose Cup Size:</label>
-            <select id="cupSize">
-                <option value="">Select a size</option>
-                <option value="Short">Short - ₱120.00</option>
-                <option value="Tall">Tall - ₱150.00</option>
-                <option value="Grande">Grande - ₱180.00</option>
-                <option value="Venti">Venti - ₱220.00</option>
-            </select>
-            <p id="priceDisplay"></p>
+    <section id="about">
+        <div class="about-wrapper">
+            <h2>About Us</h2>
+            <p>Coffee Call is a haven for coffee lovers. Our passion for brewing the finest beans is matched only by our dedication to creating a cozy atmosphere for our customers. Join us for a cup and experience the warmth of our community.</p>
+            <button id="learnMoreButton">Learn More</button>
         </div>
+    </section>
 
-        <!-- Step 2: Sugar Level -->
-        <div class="step" id="step2">
-            <label for="sugarLevel">Choose Sugar Level:</label>
-            <input type="range" id="sugarLevel" min="25" max="150" step="25" value="100">
-            <p id="sugarLevelValue">Sugar Level: 100%</p>
+    <section id="menu">
+        <h2>Our Menu</h2>
+        <div class="menu-item">
+            <img src="coffee.jpg" alt="Coffee">
+            <div>
+                <h3>Coffee - &#8369;280</h3>
+                <p>A perfect cup of coffee made from freshly brewed beans.</p>
+            </div>
         </div>
-
-        <!-- Step 3: Whipped Cream & Toppings -->
-        <div class="step" id="step3">
-            <label>
-                <input type="checkbox" id="whippedCream" value="Whipped Cream">
-                Whipped Cream
-            </label>
-            <label>
-                <input type="checkbox" id="chocolateSyrup" value="Chocolate Syrup">
-                Chocolate Syrup
-            </label>
-            <label>
-                <input type="checkbox" id="vanillaSyrup" value="Vanilla Syrup">
-                Vanilla Syrup
-            </label>
-            <label>
-                <input type="checkbox" id="cinnamon" value="Cinnamon">
-                Cinnamon
-            </label>
+        <div class="menu-item">
+            <img src="espresso.jpg" alt="Espresso">
+            <div>
+                <h3>Espresso - &#8369;170</h3>
+                <p>A strong shot of espresso for the coffee lover.</p>
+            </div>
         </div>
-
-        <!-- Step 4: Delivery Address -->
-        <div class="step" id="step4">
-            <label for="deliveryAddress">Enter Delivery Address:</label>
-            <input type="text" id="deliveryAddress" placeholder="Your Delivery Address" required><br><br>
+        <div class="menu-item">
+            <img src="latte.jpg" alt="Latte">
+            <div>
+                <h3>Latte - &#8369;340</h3>
+                <p>A smooth blend of espresso and steamed milk.</p>
+            </div>
         </div>
-
-        <!-- Step 5: Final Review -->
-        <div class="step" id="step5">
-            <h2>Review Your Order</h2>
-            <p id="orderSummary"></p>
+        <div class="menu-item">
+            <img src="Cappuccino.jpg" alt="Cappuccino">
+            <div>
+                <h3>Cappuccino - &#8369;340</h3>
+                <p>A creamy mix of espresso, steamed milk, and foam.</p>
+            </div>
         </div>
-
-        <!-- Navigation Buttons -->
-        <div class="step-buttons">
-            <button id="prevStep" disabled>Previous</button>
-            <button id="nextStep">Next</button>
+        <div class="menu-item">
+            <img src="pastries.jpg" alt="Pastries">
+            <div>
+                <h3>Pastries - &#8369;110 - &#8369;220</h3>
+                <p>Freshly baked pastries to pair with your coffee.</p>
+            </div>
         </div>
+    </section>
 
-        <p id="message"></p>
-    </div>
+    <section id="reviews">
+        <h2>Customer Reviews</h2>
+        <div class="review">
+            <p>"Best coffee I've ever had! Can't start my day without it."</p>
+        </div>
+        <div class="review">
+            <p>"Cozy atmosphere and great customer service."</p>
+        </div>
+        <div class="review">
+            <p>"The pastries are to die for! Highly recommend the cappuccino too."</p>
+        </div>
+        <button>Read More Reviews</button>
+    </section>
 
-    <!-- About Us Section -->
-    <div class="about-us">
-        <h2>About Us</h2>
-        <p>At Coffee Call, we are passionate about serving the best coffee in town. Our beans are handpicked from the finest farms and roasted to perfection. Whether you're in the mood for a quick espresso or a cozy cappuccino, we've got something for every coffee lover. Join us on this flavorful journey!</p>
-    </div>
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <div class="contact-form">
+            <form>
+                <input type="text" placeholder="Name" required>
+                <input type="email" placeholder="Email" required>
+                <textarea placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+        <footer>
+            <p>Follow Us:</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com" target="_blank">Instagram</a>
+                <a href="https://www.facebook.com" target="_blank">Facebook</a>
+            </div>
+            <p>&copy; 2024 Coffee Call. All rights reserved.</p>
+        </footer>
+    </section>
 
-    <!-- Social Media Section -->
-    <div class="social-icons">
-        <a href="https://www.facebook.com/profile.php?id=61568806676859&mibextid=LQQJ4d" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook"></a>
-        <a href="https://www.instagram.com/coffe_ecall?igsh=MTRlOTUyeGE5dzQxMg%3D%3D&utm_source=qr" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1200px-Instagram_logo_2016.svg.png" alt="Instagram"></a>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        let currentStep = 1;
-        const totalSteps = 5;
-
-        const priceList = {
-            "Short": 120,
-            "Tall": 150,
-            "Grande": 180,
-            "Venti": 220
+        document.getElementById('orderButton').onclick = () => {
+            document.getElementById('orderModal').style.display = 'flex';
         };
 
-        $("#cupSize").change(function () {
-            const selectedSize = $(this).val();
-            const price = priceList[selectedSize];
-            if (price) {
-                $("#priceDisplay").text(`Price: ₱${price.toFixed(2)}`);
-            } else {
-                $("#priceDisplay").text("");
-            }
+        document.querySelector('.close-button').onclick = () => {
+            document.getElementById('orderModal').style.display = 'none';
+        };
+        const menuItems = document.querySelectorAll('.menu-item');
+        menuItems.forEach((item) => {
+            item.addEventListener('click', () => {
+                alert('Item added to cart!');
+            });
         });
-
-        $("#nextStep").click(() => {
-            if (currentStep < totalSteps) {
-                changeStep(1);
-            } else {
-                placeOrder();
-            }
-        });
-
-        $("#prevStep").click(() => {
-            if (currentStep > 1) {
-                changeStep(-1);
-            }
-        });
-
-        function changeStep(direction) {
-            $(`#step${currentStep}`).removeClass("active-step");
-            currentStep += direction;
-            $(`#step${currentStep}`).addClass("active-step");
-            $("#prevStep").prop("disabled", currentStep === 1);
-            $("#nextStep").text(currentStep === totalSteps ? "Place Order" : "Next");
-        }
-
-        $("#sugarLevel").on("input", function () {
-            $("#sugarLevelValue").text(`Sugar Level: ${$(this).val()}%`);
-        });
-
-        function placeOrder() {
-            const customerName = $("#customerName").val();
-            const cupSize = $("#cupSize").val();
-            const sugarLevel = $("#sugarLevel").val();
-            const whippedCream = $("#whippedCream").prop("checked") ? "Yes" : "No";
-            const chocolateSyrup = $("#chocolateSyrup").prop("checked") ? "Yes" : "No";
-            const vanillaSyrup = $("#vanillaSyrup").prop("checked") ? "Yes" : "No";
-            const cinnamon = $("#cinnamon").prop("checked") ? "Yes" : "No";
-            const deliveryAddress = $("#deliveryAddress").val();
-
-            const orderSummary = `
-                <p><strong>Customer Name:</strong> ${customerName || "Not provided"}</p>
-                <p><strong>Cup Size:</strong> ${cupSize || "Not provided"}</p>
-                <p><strong>Sugar Level:</strong> ${sugarLevel || "Default (100%)"}</p>
-                <p><strong>Whipped Cream:</strong> ${whippedCream}</p>
-                <p><strong>Chocolate Syrup:</strong> ${chocolateSyrup}</p>
-                <p><strong>Vanilla Syrup:</strong> ${vanillaSyrup}</p>
-                <p><strong>Cinnamon:</strong> ${cinnamon}</p>
-                <p><strong>Delivery Address:</strong> ${deliveryAddress || "Not provided"}</p>
-            `;
-            $("#orderSummary").html(orderSummary);
-            $("#message").html("Order placed successfully! Thank you!");
-            changeStep(1);
-        }
+        const readMoreReviewsButton = document.querySelector('#reviews button');
+        readMoreReviewsButton.onclick = () => {
+            alert('Loading more reviews! Stay tuned.');
+        };
     </script>
 </body>
+
 </html>
